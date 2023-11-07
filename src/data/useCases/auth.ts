@@ -11,7 +11,7 @@ export class Auth {
     this.encrypter = encrypter
   }
 
-  async auth (account: { email: string, password: string }): Promise<string | Error> {
+  async auth (account: { email: string, password: string }): Promise<{ token: string, refreshToken: string } | Error> {
     const user = await this.userRepository.findOne({
       where: { email: account.email }
     })
@@ -33,6 +33,13 @@ export class Auth {
       expiresIn: '1h'
     })
 
-    return token
+    const refreshToken = sign({ token }, 'secret', {
+      expiresIn: '1h'
+    })
+
+    return {
+      token,
+      refreshToken
+    }
   }
 }

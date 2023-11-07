@@ -9,7 +9,7 @@ export function auth (route: Router): void {
     const bcrypt = new BcryptEncrypter()
     const auth = new Auth(UserRepository, bcrypt)
     const controller = new Login(auth)
-    const result2 = await controller.handle(req.body)
-    res.json(result2)
+    const result = await controller.handle(req.body)
+    res.json(result)
   })
 }
