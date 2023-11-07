@@ -8,8 +8,8 @@ export function signUp (route: Router): void {
   route.post('/signup', async (req, res) => {
     const bcrypt = new BcryptEncrypter()
     const addAccount = new AddAccount(UserRepository, bcrypt)
-    const account = new CreateUser(addAccount)
-    const response = await account.add(req.body)
+    const controller = new CreateUser(addAccount)
+    const response = await controller.handle(req.body)
     return res.send(response)
   })
 }

@@ -1,15 +1,16 @@
-import { type Response } from '../domain/response'
 import { type AddAccount } from '../data/useCases/addAccount'
+import { type Controller } from './protocols/controller'
+import { type HttpResponse } from './protocols/http'
 
-export class CreateUser {
+export class CreateUser implements Controller {
   private readonly addAccount: AddAccount
   constructor (addAccount: AddAccount) {
     this.addAccount = addAccount
   }
 
-  async add (body: any): Promise<Response> {
+  async handle (account: any): Promise<HttpResponse> {
     try {
-      const { email, password, username, confirmPassword } = body
+      const { email, password, username, confirmPassword } = account
 
       const requiredFields = [
         'email',
@@ -18,7 +19,7 @@ export class CreateUser {
         'username'
       ]
       for (const field of requiredFields) {
-        if (!body[field]) {
+        if (!account[field]) {
           throw new Error('ERROR!')
         }
       }
@@ -27,12 +28,13 @@ export class CreateUser {
 
       return {
         body: 'Usuario criado com sucesso!',
-        statusCode: 200
+        status: 200
       }
     } catch (error) {
+      console.log(error)
       return {
         body: 'DEU ERRO',
-        statusCode: 500
+        status: 500
       }
     }
   }
