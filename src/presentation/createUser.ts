@@ -1,6 +1,6 @@
 import { type AddAccount } from '../data/useCases/addAccount'
 import { type Controller } from './protocols/controller'
-import { type HttpResponse } from './protocols/http'
+import { type HttpRequest, type HttpResponse } from './protocols/http'
 
 export class CreateUser implements Controller {
   private readonly addAccount: AddAccount
@@ -8,9 +8,9 @@ export class CreateUser implements Controller {
     this.addAccount = addAccount
   }
 
-  async handle (account: any): Promise<HttpResponse> {
+  async handle (body: HttpRequest): Promise<HttpResponse> {
     try {
-      const { email, password, username, confirmPassword } = account
+      const { email, password, username, confirmPassword } = body
 
       const requiredFields = [
         'email',
@@ -19,7 +19,7 @@ export class CreateUser implements Controller {
         'username'
       ]
       for (const field of requiredFields) {
-        if (!account[field]) {
+        if (!body[field]) {
           throw new Error('ERROR!')
         }
       }

@@ -1,6 +1,6 @@
 import { type Auth } from '../data/useCases/auth'
 import { type Controller } from './protocols/controller'
-import { type HttpResponse } from './protocols/http'
+import { type HttpRequest, type HttpResponse } from './protocols/http'
 
 export class Login implements Controller {
   private readonly auth: Auth
@@ -8,9 +8,9 @@ export class Login implements Controller {
     this.auth = auth
   }
 
-  async handle (request: any): Promise<HttpResponse> {
+  async handle (body: HttpRequest): Promise<HttpResponse> {
     try {
-      const { email, password } = request
+      const { email, password } = body
       const token = await this.auth.auth({ email, password })
 
       return {
