@@ -1,22 +1,13 @@
 import express from 'express'
-import { AddAccount } from '../data/useCases/addAccount'
-import { BcryptEncrypter } from '../infra/bcrypt/bcrypt'
-import { UserRepository } from '../infra/typeorm/repositories/userRepository'
 import bodyParser from 'body-parser'
 import { AppDataSource } from '../infra/typeorm/dataSource'
-import { CreateUser } from '../presentation/createUser'
+import router from './routes'
 
 const app = express()
 
 app.use(bodyParser.json())
 
-app.post('/signup', async (req, res) => {
-  const bcrypt = new BcryptEncrypter()
-  const addAccount = new AddAccount(UserRepository, bcrypt)
-  const account = new CreateUser(addAccount)
-  const response = await account.add(req.body)
-  return res.send(response)
-})
+router(app)
 
 AppDataSource.initialize()
   .then(() => {
