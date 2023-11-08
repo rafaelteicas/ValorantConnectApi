@@ -1,6 +1,6 @@
-import { sign } from 'jsonwebtoken'
 import { type Encrypter } from '../../domain/encrypter'
 import { type UserRepository } from '../../infra/typeorm/repositories/userRepository'
+import { generateRefreshToken, generateToken } from '../../infra/jwt/utils/jwtGenerator'
 
 export class Auth {
   private readonly userRepository: typeof UserRepository
@@ -11,7 +11,7 @@ export class Auth {
     this.encrypter = encrypter
   }
 
-  async auth (account: { email: string, password: string }): Promise<{ token: string, refreshToken: string } | Error> {
+  async auth (account: { email: string, password: string }): Promise< any | Error> {
     const user = await this.userRepository.findOne({
       where: { email: account.email }
     })
@@ -29,13 +29,8 @@ export class Auth {
       throw new Error('Usuario invalido')
     }
 
-    const token = sign({ id: user.id }, 'secret', {
-      expiresIn: '1h'
-    })
-
-    const refreshToken = sign({ token }, 'secret', {
-      expiresIn: '1h'
-    })
+    const token = generateToken(user.email)
+    const refreshToken = generateRefreshToken(token)
 
     return {
       token,
