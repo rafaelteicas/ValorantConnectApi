@@ -1,13 +1,7 @@
-import express from 'express'
-import bodyParser from 'body-parser'
 import { AppDataSource } from '../infra/typeorm/dataSource'
-import router from './routes'
+import { appConfig } from './config/app'
 
-const app = express()
-
-app.use(bodyParser.json())
-
-router(app)
+const app = appConfig()
 
 AppDataSource.initialize()
   .then(() => {

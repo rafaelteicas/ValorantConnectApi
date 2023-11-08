@@ -4,7 +4,7 @@ import { AddAccount } from '../../data/useCases/addAccount'
 import { UserRepository } from '../../infra/typeorm/repositories/userRepository'
 import { CreateUser } from '../../presentation/createUser'
 
-export function signUp (route: Router): void {
+export default function (route: Router): void {
   route.post('/signup', async (req, res) => {
     const bcrypt = new BcryptEncrypter()
     const addAccount = new AddAccount(UserRepository, bcrypt)

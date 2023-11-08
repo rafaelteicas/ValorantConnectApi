@@ -5,7 +5,7 @@ import { UserRepository } from '../../infra/typeorm/repositories/userRepository'
 import { Login } from '../../presentation/login'
 import { AuthMiddleware } from '../middlewares/authMiddleware'
 
-export function auth (route: Router): void {
+export default function (route: Router): void {
   route.get('/auth', AuthMiddleware, (req, res) => {
     res.send('OK')
   })
