@@ -6,7 +6,6 @@ const routeFile = path.join(process.cwd(), 'src', 'main', 'routes')
 
 export async function routerGenerator (app: Express): Promise<void> {
   const router = Router()
-
   try {
     const files = await fs.readdir(routeFile)
 
@@ -14,8 +13,6 @@ export async function routerGenerator (app: Express): Promise<void> {
       const moduleRoute = await import(path.join(routeFile, file))
       moduleRoute.default(router)
     }
-
-    // Use o roteador em todas as rotas correspondentes
     app.use('/', router)
   } catch (err) {
     console.error('Erro ao carregar rotas:', err)
