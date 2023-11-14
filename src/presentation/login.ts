@@ -18,9 +18,8 @@ export class Login implements Controller {
         status: 200
       }
     } catch (e) {
-      console.log(e)
       return {
-        body: 'DEU ERRO',
+        body: e.message,
         status: 400
       }
     }

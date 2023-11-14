@@ -9,6 +9,7 @@ AppDataSource.initialize()
   })
   .catch(() => {
     console.log('DEU RUIM')
+    throw new Error('CONECTE COM O DOCKER')
   })
 
 app.listen(3000, () => {

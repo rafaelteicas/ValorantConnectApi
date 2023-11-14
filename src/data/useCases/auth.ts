@@ -1,6 +1,7 @@
 import { type Encrypter } from '../../domain/encrypter'
 import { type UserRepository } from '../../infra/typeorm/repositories/userRepository'
 import { generateRefreshToken, generateToken } from '../../infra/jwt/utils/jwtGenerator'
+import { type AccountData } from '../../domain/userTypes'
 
 export class Auth {
   private readonly userRepository: typeof UserRepository
@@ -11,7 +12,7 @@ export class Auth {
     this.encrypter = encrypter
   }
 
-  async auth (account: { email: string, password: string }): Promise< any | Error> {
+  async auth (account: { email: string, password: string }): Promise< AccountData | Error> {
     const user = await this.userRepository.findOne({
       where: { email: account.email }
     })
@@ -29,12 +30,19 @@ export class Auth {
       throw new Error('Usuario invalido')
     }
 
-    const token = generateToken(user.email)
-    const refreshToken = generateRefreshToken(token)
+    const accessToken = generateToken(user.email)
+    const refreshToken = generateRefreshToken(user.email)
 
     return {
-      token,
-      refreshToken
+      token: {
+        accessToken,
+        refreshToken
+      },
+      user: {
+        id: user.id,
+        email: user.email,
+        username: user.username
+      }
     }
   }
 }

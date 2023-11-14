@@ -14,6 +14,7 @@ export default function (route: Router): void {
     const auth = new Auth(UserRepository, bcrypt)
     const controller = new Login(auth)
     const result = await controller.handle(req.body)
-    res.json(result)
+    res.status(result.status)
+    res.send(result.body)
   })
 }
