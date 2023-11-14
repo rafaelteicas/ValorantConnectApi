@@ -19,3 +19,8 @@ export interface AccountData {
   }
   user: Pick<UserAccount, 'id' | 'email' | 'username'>
 }
+
+export interface GetByIdResponse {
+  email: string
+  username: string
+}

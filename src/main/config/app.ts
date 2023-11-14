@@ -5,6 +5,6 @@ import bodyParser from 'body-parser'
 export function appConfig (): Express {
   const app = express()
   app.use(bodyParser.json())
-  routerGenerator(app).catch(e => console.log(e))
+  routerGenerator(app).then(() => console.log('/')).catch(e => console.log(e))
   return app
 }
