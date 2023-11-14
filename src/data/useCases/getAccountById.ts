@@ -1,4 +1,4 @@
-import { type GetByIdResponse } from '../../domain/userTypes'
+import { type User } from '../../infra/typeorm/entities/User'
 import { type UserRepository } from '../../infra/typeorm/repositories/userRepository'
 
 export class GetAccountById {
@@ -8,12 +8,9 @@ export class GetAccountById {
     this.userRepository = userRepository
   }
 
-  async get (id: number): Promise<GetByIdResponse | Error> {
+  async get (id: number): Promise<User> {
     const user = await this.userRepository.findOneBy({ id })
     if (!user) throw new Error('USER NOT FOUND')
-    return {
-      email: user?.email,
-      username: user.username
-    }
+    return user
   }
 }
