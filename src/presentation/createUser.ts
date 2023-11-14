@@ -8,9 +8,9 @@ export class CreateUser implements Controller {
     this.addAccount = addAccount
   }
 
-  async handle (body: HttpRequest): Promise<HttpResponse> {
+  async handle (request: HttpRequest): Promise<HttpResponse> {
     try {
-      const { email, password, username, confirmPassword } = body
+      const { email, password, username, confirmPassword } = request.body
 
       const requiredFields = [
         'email',
@@ -19,21 +19,27 @@ export class CreateUser implements Controller {
         'username'
       ]
       for (const field of requiredFields) {
-        if (!body[field]) {
-          throw new Error('ERROR!')
+        if (!request.body[field]) {
+          console.log('FALTA ', field)
+
+          throw new Error('ERROR')
         }
       }
 
-      await this.addAccount.add({ email, password, username, confirmPassword })
+      await this.addAccount.add({
+        email,
+        password,
+        username,
+        confirmPassword
+      })
 
       return {
         body: 'Usuario criado com sucesso!',
         status: 200
       }
-    } catch (error) {
-      console.log(error)
+    } catch (err) {
       return {
-        body: 'DEU ERRO',
+        body: 'Server Error',
         status: 500
       }
     }

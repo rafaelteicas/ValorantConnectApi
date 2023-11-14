@@ -6,6 +6,9 @@ const app = appConfig()
 const PORT = 3000
 
 AppDataSource.initialize()
+  .then(() => {
+    console.log('CONNECTED')
+  })
   .catch(() => {
     throw new Error('CONECTE COM O DOCKER')
   })
