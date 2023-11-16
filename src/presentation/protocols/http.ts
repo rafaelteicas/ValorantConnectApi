@@ -1,6 +1,10 @@
-export type HttpRequest = any
+export interface HttpRequest {
+  body: any
+  userId?: string
+  fileImage?: Express.Multer.File
+}
 
 export interface HttpResponse {
-  body: HttpRequest
+  body: any
   status: number
 }

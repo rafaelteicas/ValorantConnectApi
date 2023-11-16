@@ -8,8 +8,10 @@ export class GetAccountById {
     this.userRepository = userRepository
   }
 
-  async get (id: number): Promise<User> {
-    const user = await this.userRepository.findOneBy({ id })
+  async get (id: string): Promise<User> {
+    if (!id) throw new Error()
+    const intId = parseInt(id)
+    const user = await this.userRepository.findOneBy({ id: intId })
     if (!user) throw new Error('USER NOT FOUND')
     return user
   }

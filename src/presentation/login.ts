@@ -8,7 +8,7 @@ export class Login implements Controller {
     this.auth = auth
   }
 
-  async handle (body: HttpRequest): Promise<HttpResponse> {
+  async handle ({ body }: HttpRequest): Promise<HttpResponse> {
     try {
       const { email, password } = body
       const token = await this.auth.auth({ email, password })
