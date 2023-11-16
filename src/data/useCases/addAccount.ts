@@ -6,15 +6,22 @@ export class AddAccount {
   private readonly userRepository: typeof UserRepository
   private readonly encrypter: Encrypter
 
-  constructor (userRepository: typeof UserRepository, encrypter: Encrypter) {
+  constructor (
+    userRepository: typeof UserRepository,
+    encrypter: Encrypter
+  ) {
     this.userRepository = userRepository
     this.encrypter = encrypter
   }
 
   async add (account: User): Promise<UserAccount | Error> {
     const hash = await this.encrypter.encrypt(account.password)
-    const findByEmail = await this.userRepository.findOne({ where: { email: account.email } })
-    const findByUserName = await this.userRepository.findOne({ where: { username: account.username } })
+    const findByEmail = await this.userRepository.findOne({
+      where: { email: account.email }
+    })
+    const findByUserName = await this.userRepository.findOne({
+      where: { username: account.username }
+    })
     if (findByEmail || findByUserName) {
       throw new Error('Usuario ja existe')
     }

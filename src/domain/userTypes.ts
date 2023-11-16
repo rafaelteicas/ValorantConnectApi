@@ -10,6 +10,7 @@ export interface UserAccount {
   email: string
   username: string
   password: string
+  token: string
 }
 
 export interface AccountData {

@@ -15,6 +15,9 @@ export class User implements UserAccount {
   @Column({ unique: true })
     username: string
 
+  @Column({ unique: true, nullable: true })
+    token: string
+
   @Column({
     nullable: true,
     unique: true

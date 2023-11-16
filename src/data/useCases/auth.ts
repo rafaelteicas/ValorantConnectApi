@@ -12,27 +12,24 @@ export class Auth {
     this.encrypter = encrypter
   }
 
-  async auth (account: { email: string, password: string }): Promise< AccountData | Error> {
+  async auth (account: { email: string, password: string }): Promise<AccountData | Error> {
     const user = await this.userRepository.findOne({
       where: { email: account.email }
     })
-
     if (!user) {
       throw new Error('Usuario invalido')
     }
-
     const isValidPassword = await this.encrypter.compare(
       account.password,
       user.password
     )
-
     if (!isValidPassword) {
       throw new Error('Usuario invalido')
     }
-
     const accessToken = generateToken(user.email)
     const refreshToken = generateRefreshToken(user.email)
-
+    user.token = accessToken
+    await this.userRepository.save(user)
     return {
       token: {
         accessToken,
