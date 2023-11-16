@@ -7,14 +7,12 @@ export class FirebaseStorageService implements Storage {
     file: Buffer,
     fileName: string,
     metadata?: UploadMetadata
-  ): Promise<string | Error> {
+  ): Promise<string> {
     const storage = getStorage(app)
     const storageRef = ref(storage, `profileImage/${fileName}`)
-    const url = await uploadBytes(storageRef, file, metadata).then(async () => {
+    await uploadBytes(storageRef, file, metadata).then(async () => {
       console.log('Upload com sucesso!')
-      return await getDownloadURL(storageRef)
     }).catch((e) => console.log('ERRO: ', e))
-    if (typeof url === 'string') return url
-    throw new Error('Nao foi possivel fazer o upload')
+    return await getDownloadURL(storageRef)
   }
 }

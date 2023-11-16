@@ -3,5 +3,5 @@ export interface Storage {
     file: Buffer,
     fileName: string,
     metadata?: any,
-  ) => Promise<string | Error>
+  ) => Promise<string>
 }
