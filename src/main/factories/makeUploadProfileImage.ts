@@ -1,7 +1,7 @@
 import { GetAccountById } from '../../data/useCases/getAccountById'
 import { UserRepository } from '../../infra/typeorm/repositories/userRepository'
 import { type Controller } from '../../presentation/protocols/controller'
-import { UploadProfileImage } from '../../presentation/uploadProfileImage'
+import { UploadProfileImage } from '../../presentation/controllers/upload/uploadProfileImage'
 import { FirebaseStorageService } from '../../services/firebase/firebaseStorage'
 
 export const makeUploadProfileImage = (): Controller => {

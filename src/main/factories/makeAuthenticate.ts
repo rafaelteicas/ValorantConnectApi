@@ -1,7 +1,7 @@
 import { Auth } from '../../data/useCases/auth'
 import { BcryptEncrypter } from '../../infra/bcrypt/bcrypt'
 import { UserRepository } from '../../infra/typeorm/repositories/userRepository'
-import { Login } from '../../presentation/login'
+import { Login } from '../../presentation/controllers/login/login'
 import { type Controller } from '../../presentation/protocols/controller'
 
 export const makeAuthenticate = (): Controller => {

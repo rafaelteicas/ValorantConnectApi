@@ -1,8 +1,8 @@
-import { type GetAccountById } from '../data/useCases/getAccountById'
-import { type UserRepository } from '../infra/typeorm/repositories/userRepository'
-import { type Controller } from './protocols/controller'
-import { type HttpRequest, type HttpResponse } from './protocols/http'
-import { type Storage } from '../domain/storage'
+import { type GetAccountById } from '../../../data/useCases/getAccountById'
+import { type UserRepository } from '../../../infra/typeorm/repositories/userRepository'
+import { type Controller } from '../../protocols/controller'
+import { type HttpRequest, type HttpResponse } from '../../protocols/http'
+import { type Storage } from '../../../domain/storage/storage'
 
 export class UploadProfileImage implements Controller {
   private readonly getAccountById: GetAccountById

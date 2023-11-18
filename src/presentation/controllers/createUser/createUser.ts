@@ -1,6 +1,6 @@
-import { type AddAccount } from '../data/useCases/addAccount'
-import { type Controller } from './protocols/controller'
-import { type HttpRequest, type HttpResponse } from './protocols/http'
+import { type AddAccount } from '../../../data/useCases/addAccount'
+import { type Controller } from '../../protocols/controller'
+import { type HttpRequest, type HttpResponse } from '../../protocols/http'
 
 export class CreateUser implements Controller {
   private readonly addAccount: AddAccount

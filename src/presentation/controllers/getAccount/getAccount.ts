@@ -1,7 +1,7 @@
-import { type GetAccountById } from '../data/useCases/getAccountById'
-import { type Controller } from './protocols/controller'
-import { type GetUser } from './protocols/getUser'
-import { type HttpResponse } from './protocols/http'
+import { type GetAccountById } from '../../../data/useCases/getAccountById'
+import { type Controller } from '../../protocols/controller'
+import { type GetUser } from '../../protocols/getUser'
+import { type HttpResponse } from '../../protocols/http'
 
 export class GetAccountBy implements Controller {
   private readonly getAccountById: GetAccountById

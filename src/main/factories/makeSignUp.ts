@@ -1,7 +1,7 @@
 import { AddAccount } from '../../data/useCases/addAccount'
 import { BcryptEncrypter } from '../../infra/bcrypt/bcrypt'
 import { UserRepository } from '../../infra/typeorm/repositories/userRepository'
-import { CreateUser } from '../../presentation/createUser'
+import { CreateUser } from '../../presentation/controllers/createUser/createUser'
 import { type Controller } from '../../presentation/protocols/controller'
 
 export function makeSignUp (): Controller {

@@ -1,7 +1,7 @@
 import { sign } from 'jsonwebtoken'
 import path from 'path'
 import fs from 'fs'
-import { type TokenGenerator } from '../../../domain/tokenGenerator'
+import { type TokenGenerator } from '../../../domain/token/tokenGenerator'
 
 const privateKeyPath = path.join(process.cwd(), 'keys', 'privkey.key')
 const privateKey = fs.readFileSync(privateKeyPath)

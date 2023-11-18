@@ -1,6 +1,6 @@
 import { type UploadMetadata, getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { app } from './config/firebaseConfig'
-import { type Storage } from '../../domain/storage'
+import { type Storage } from '../../domain/storage/storage'
 
 export class FirebaseStorageService implements Storage {
   async uploadFile (
