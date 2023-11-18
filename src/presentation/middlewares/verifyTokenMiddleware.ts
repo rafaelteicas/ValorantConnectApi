@@ -3,7 +3,7 @@ import { response } from '../helpers/http'
 import { type HttpRequest, type HttpResponse } from '../protocols/http'
 import { type Middleware } from '../protocols/middleware'
 
-export class VerifyToken implements Middleware {
+export class VerifyTokenMiddleware implements Middleware {
   private readonly checkToken: CheckToken
   constructor (checkToken: CheckToken) {
     this.checkToken = checkToken

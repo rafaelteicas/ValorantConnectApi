@@ -1,5 +1,6 @@
 import { type CheckToken } from '../../../domain/token/checkToken'
-import { VerifyToken } from '../verifyToken'
+import { VerifyTokenMiddleware } from '../verifyTokenMiddleware'
+import { response as responseHelper } from '../../helpers/http'
 
 const makeCheckTokenStub = (): CheckToken => {
   class CheckTokenStub implements CheckToken {
@@ -11,13 +12,13 @@ const makeCheckTokenStub = (): CheckToken => {
 }
 
 interface SutTypes {
-  sut: VerifyToken
+  sut: VerifyTokenMiddleware
   checkTokenStub: CheckToken
 }
 
 const makeSut = (): SutTypes => {
   const checkTokenStub = makeCheckTokenStub()
-  const sut = new VerifyToken(checkTokenStub)
+  const sut = new VerifyTokenMiddleware(checkTokenStub)
   return {
     sut,
     checkTokenStub
@@ -27,30 +28,21 @@ const makeSut = (): SutTypes => {
 describe('Verify Token Middleware', () => {
   it('should return unauthorized if token does not exists', async () => {
     const { sut } = makeSut()
-    const request = {
-      headers: { authorization: '' }
-    }
-    const response = await sut.handle(request)
-    expect(response.body).toEqual('unauthorized')
-    expect(response.status).toBe(401)
+    const authorizationHeader = ''
+    const response = await sut.handle(authorizationHeader)
+    expect(response).toEqual(responseHelper('unauthorized'))
   })
   it('should return unauthorized if token is invalid', async () => {
     const { sut, checkTokenStub } = makeSut()
     jest.spyOn(checkTokenStub, 'check').mockReturnValueOnce(false)
-    const request = {
-      headers: { authorization: 'invalid_token' }
-    }
-    const response = await sut.handle(request)
-    expect(response.body).toEqual('unauthorized')
-    expect(response.status).toBe(401)
+    const authorizationHeader = 'invalid_token'
+    const response = await sut.handle(authorizationHeader)
+    expect(response).toEqual(responseHelper('unauthorized'))
   })
   it('should return of if token is valid', async () => {
     const { sut } = makeSut()
-    const request = {
-      headers: { authorization: 'valid_token' }
-    }
-    const response = await sut.handle(request)
-    expect(response.body).toEqual('Ok')
-    expect(response.status).toBe(200)
+    const authorizationHeader = 'valid_token'
+    const response = await sut.handle(authorizationHeader)
+    expect(response).toEqual(responseHelper('success'))
   })
 })
