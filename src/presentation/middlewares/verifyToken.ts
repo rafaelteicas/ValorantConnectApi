@@ -1,8 +1,8 @@
 import { type CheckToken } from '../../domain/token/checkToken'
-import { type Controller } from '../protocols/controller'
 import { type HttpRequest, type HttpResponse } from '../protocols/http'
+import { type Middleware } from '../protocols/middleware'
 
-export class VerifyToken implements Controller {
+export class VerifyToken implements Middleware {
   private readonly checkToken: CheckToken
   constructor (checkToken: CheckToken) {
     this.checkToken = checkToken
