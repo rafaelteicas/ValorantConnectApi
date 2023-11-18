@@ -2,10 +2,10 @@ import { type Router } from 'express'
 import { GetAccountBy } from '../../presentation/controllers/getAccount/getAccount'
 import { UserRepository } from '../../infra/typeorm/repositories/userRepository'
 import { GetAccountById } from '../../data/useCases/getAccountById'
-import { AuthMiddleware } from '../middlewares/authMiddleware'
+import { authMiddleware } from '../middlewares/authMiddleware'
 
 export default (route: Router): void => {
-  route.get('/user/:id', AuthMiddleware, async (req, res) => {
+  route.get('/user/:id', authMiddleware, async (req, res) => {
     const id = req.params.id
     const account = new GetAccountById(UserRepository)
     const controller = new GetAccountBy(account)

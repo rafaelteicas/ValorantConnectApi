@@ -34,6 +34,8 @@ export class UploadProfileImage implements Controller {
         status: 200
       }
     } catch (er) {
+      console.log(er)
+
       return {
         body: 'erro',
         status: 500

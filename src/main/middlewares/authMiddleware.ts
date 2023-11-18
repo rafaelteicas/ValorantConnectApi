@@ -1,14 +1,4 @@
-import { type Request, type Response, type NextFunction } from 'express'
-import { verifyToken } from '../../infra/jwt/utils/verifyToken'
+import { adapterExpressMiddleware } from '../adapter/expressMiddleware'
+import { makeAuthMiddleware } from '../factories/makeAuthMiddleware'
 
-export function AuthMiddleware (req: Request, res: Response, next: NextFunction): void {
-  const headerToken = req.headers.authorization?.split(' ')[1]
-
-  if (headerToken == null) {
-    throw new Error('unauthorized')
-  }
-
-  verifyToken(headerToken)
-
-  next()
-}
+export const authMiddleware = adapterExpressMiddleware(makeAuthMiddleware())
