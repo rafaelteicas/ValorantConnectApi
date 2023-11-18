@@ -7,9 +7,9 @@ const publicKeyPath = path.join(process.cwd(), 'keys', 'pubkey.key')
 const publicKey = fs.readFileSync(publicKeyPath)
 
 export class VerifyTokenJWT implements CheckToken {
-  check (token: string): boolean {
-    verify(
-      token,
+  check (token: string): any {
+    return verify(
+      token.split(' ')[1],
       publicKey,
       { algorithms: ['RS256'] },
       (error, user) => {
@@ -19,6 +19,5 @@ export class VerifyTokenJWT implements CheckToken {
         return user
       }
     )
-    return true
   }
 }
