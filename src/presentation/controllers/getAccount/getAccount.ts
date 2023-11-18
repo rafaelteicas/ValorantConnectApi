@@ -1,4 +1,5 @@
 import { type GetAccountById } from '../../../data/useCases/getAccountById'
+import { response } from '../../helpers/http'
 import { type Controller } from '../../protocols/controller'
 import { type GetUser } from '../../protocols/getUser'
 import { type HttpResponse } from '../../protocols/http'
@@ -15,14 +16,11 @@ export class GetAccountBy implements Controller {
       return { body: new Error(), status: 400 }
     }
     const accountData = await this.getAccountById.get(request)
-    const response: GetUser = {
+    const responseData: GetUser = {
       email: accountData.email,
       username: accountData.username,
       profileImage: accountData.profile_image
     }
-    return {
-      body: response,
-      status: 200
-    }
+    return response('success', responseData)
   }
 }
