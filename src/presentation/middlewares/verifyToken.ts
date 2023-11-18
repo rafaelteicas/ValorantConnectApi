@@ -1,4 +1,5 @@
 import { type CheckToken } from '../../domain/token/checkToken'
+import { response } from '../helpers/http'
 import { type HttpRequest, type HttpResponse } from '../protocols/http'
 import { type Middleware } from '../protocols/middleware'
 
@@ -9,22 +10,10 @@ export class VerifyToken implements Middleware {
   }
 
   async handle (request: HttpRequest): Promise<HttpResponse> {
-    if (!request.headers.authorization) {
-      return {
-        body: 'unauthorized',
-        status: 401
-      }
-    }
     const isValid = this.checkToken.check(request.headers.authorization)
-    if (!isValid) {
-      return {
-        body: 'unauthorized',
-        status: 401
-      }
+    if (!request.headers.authorization || !isValid) {
+      return response('unauthorized')
     }
-    return {
-      body: 'Ok',
-      status: 200
-    }
+    return response('success')
   }
 }
