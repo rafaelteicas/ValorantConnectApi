@@ -26,8 +26,11 @@ export class Auth {
     if (!isValidPassword) {
       throw new Error('Usuario invalido')
     }
-    const accessToken = generateToken(user.email)
-    const refreshToken = generateRefreshToken(user.email)
+    const accessToken = generateToken({ id: user.id, email: user.email })
+    const refreshToken = generateRefreshToken({
+      id: user.id,
+      email: user.email
+    })
     user.token = accessToken
     await this.userRepository.save(user)
     return {

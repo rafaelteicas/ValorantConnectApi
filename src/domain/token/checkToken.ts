@@ -1,3 +1,7 @@
+export interface CheckTokenResponse {
+  user: { id: number, email: string }
+}
+
 export interface CheckToken {
-  check: (token: string) => boolean
+  check: (data: string | number) => CheckTokenResponse | null
 }

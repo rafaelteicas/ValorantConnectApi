@@ -1,1 +1,1 @@
-export type TokenGenerator = (value: string) => string
+export type TokenGenerator = (value: any) => string

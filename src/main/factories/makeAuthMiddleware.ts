@@ -1,9 +1,12 @@
+import { GetAccountById } from '../../data/useCases/getAccountById'
 import { VerifyTokenJWT } from '../../infra/jwt/utils/verifyToken'
-import { VerifyToken } from '../../presentation/middlewares/verifyToken'
+import { UserRepository } from '../../infra/typeorm/repositories/userRepository'
+import { AuthMiddleware } from '../../presentation/middlewares/authMiddleware'
 import { type Middleware } from '../../presentation/protocols/middleware'
 
 export const makeAuthMiddleware = (): Middleware => {
   const checkToken = new VerifyTokenJWT()
-  const verifyToken = new VerifyToken(checkToken)
-  return verifyToken
+  const getAccountById = new GetAccountById(UserRepository)
+  const verifyAuth = new AuthMiddleware(checkToken, getAccountById)
+  return verifyAuth
 }

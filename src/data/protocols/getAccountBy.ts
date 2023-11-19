@@ -1,3 +1,3 @@
 export interface GetAccountBy {
-  get: (data: string) => Promise<any>
+  get: (data: any) => Promise<any>
 }

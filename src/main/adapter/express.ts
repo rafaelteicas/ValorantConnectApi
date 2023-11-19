@@ -6,7 +6,7 @@ export function adapterExpress (controller: Controller) {
   return async (req: Request, res: Response) => {
     const httpRequest: HttpRequest = {
       body: req.body,
-      userId: req.params.id,
+      params: { id: req.params.id },
       fileImage: req.file
     }
     const httpResponse: HttpResponse = await controller.handle(httpRequest)

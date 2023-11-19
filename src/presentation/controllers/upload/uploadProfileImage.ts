@@ -20,11 +20,16 @@ export class UploadProfileImage implements Controller {
   }
 
   async handle (request: HttpRequest): Promise<HttpResponse> {
+    const USER_ID = request.params?.id
     try {
-      if (!request.userId) throw new Error()
-      const user = await this.getAccountById.get(request.userId)
+      if (!USER_ID) throw new Error()
+      const user = await this.getAccountById.get(USER_ID)
       if (!user || !request.fileImage) throw new Error()
-      const newUrl = await this.storage.uploadFile(request.fileImage.buffer, request.userId, { contentType: request.fileImage.mimetype })
+      const newUrl = await this.storage.uploadFile(
+        request.fileImage.buffer,
+        USER_ID,
+        { contentType: request.fileImage.mimetype }
+      )
       if (typeof newUrl === 'string') {
         user.profile_image = newUrl
         await this.userRepository.save(user)

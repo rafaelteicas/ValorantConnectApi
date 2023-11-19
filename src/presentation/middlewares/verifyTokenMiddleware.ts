@@ -10,10 +10,15 @@ export class VerifyTokenMiddleware implements Middleware {
   }
 
   async handle (request: HttpRequest): Promise<HttpResponse> {
-    const isValid = this.checkToken.check(request)
-    if (!request || !isValid) {
-      return response('unauthorized')
+    try {
+      if (!request.authorization) return response('unauthorized')
+      const isValid = this.checkToken.check(request.authorization)
+      if (!request || !isValid) {
+        return response('unauthorized')
+      }
+      return response('success')
+    } catch (error) {
+      return response('serverError')
     }
-    return response('success')
   }
 }
