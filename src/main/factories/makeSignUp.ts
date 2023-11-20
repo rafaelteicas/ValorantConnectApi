@@ -2,7 +2,7 @@ import { AddAccount } from '../../data/useCases/addAccount'
 import { GetAccountByEmail } from '../../data/useCases/getAccountByEmail'
 import { BcryptEncrypter } from '../../infra/bcrypt/bcrypt'
 import { UserRepository } from '../../infra/typeorm/repositories/userRepository'
-import { CreateUser } from '../../presentation/controllers/createUser/createUser'
+import { CreateUser } from '../../presentation/controllers/user/signup'
 import { type Controller } from '../../presentation/protocols/controller'
 
 export function makeSignUp (): Controller {

@@ -1,5 +1,5 @@
 import { type Router } from 'express'
-import { GetAccountBy } from '../../presentation/controllers/getAccount/getAccount'
+import { GetAccountBy } from '../../presentation/controllers/user/getAccount'
 import { UserRepository } from '../../infra/typeorm/repositories/userRepository'
 import { GetAccountById } from '../../data/useCases/getAccountById'
 import { authMiddleware } from '../middlewares/authMiddleware'
