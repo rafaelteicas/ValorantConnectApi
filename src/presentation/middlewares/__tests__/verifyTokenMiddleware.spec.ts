@@ -34,13 +34,15 @@ const makeSut = (): SutTypes => {
 describe('Verify Token Middleware', () => {
   it('should return unauthorized if token does not exists', async () => {
     const { sut } = makeSut()
-    const authorizationHeader: HttpRequest = { body: '' }
+    const authorizationHeader: HttpRequest<any> = { body: '' }
     const response = await sut.handle(authorizationHeader)
     expect(response).toEqual(responseHelper('unauthorized'))
   })
   it('should return unauthorized if token is invalid', async () => {
     const { sut, checkTokenStub } = makeSut()
-    const authorizationHeader: HttpRequest = { authorization: 'invalid_token' }
+    const authorizationHeader: HttpRequest<any> = {
+      authorization: 'invalid_token'
+    }
     jest.spyOn(checkTokenStub, 'check').mockReturnValueOnce(null)
     const response = await sut.handle(authorizationHeader)
     expect(response).toEqual(responseHelper('unauthorized'))
@@ -58,7 +60,9 @@ describe('Verify Token Middleware', () => {
   })
   it('should return success if token is valid', async () => {
     const { sut } = makeSut()
-    const authorizationHeader: HttpRequest = { authorization: 'valid_token' }
+    const authorizationHeader: HttpRequest<any> = {
+      authorization: 'valid_token'
+    }
     const response = await sut.handle(authorizationHeader)
     expect(response).toEqual(responseHelper('success'))
   })
