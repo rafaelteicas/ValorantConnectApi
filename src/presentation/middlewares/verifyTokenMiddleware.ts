@@ -5,6 +5,7 @@ import { type Middleware } from '../protocols/middleware'
 
 export class VerifyTokenMiddleware implements Middleware {
   private readonly checkToken: CheckToken
+
   constructor (checkToken: CheckToken) {
     this.checkToken = checkToken
   }

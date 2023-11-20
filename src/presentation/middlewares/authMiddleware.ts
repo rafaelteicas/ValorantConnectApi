@@ -24,7 +24,7 @@ export class AuthMiddleware implements Middleware {
         return response('unauthorized')
       }
       return response('success')
-    } catch (e) {
+    } catch (error) {
       return response('serverError')
     }
   }

@@ -3,5 +3,5 @@ export interface CheckTokenResponse {
 }
 
 export interface CheckToken {
-  check: (data: string | number) => CheckTokenResponse | null
+  check: (token: string) => CheckTokenResponse | null
 }

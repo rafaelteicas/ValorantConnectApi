@@ -8,14 +8,13 @@ const publicKey = fs.readFileSync(publicKeyPath)
 
 export class VerifyTokenJWT implements CheckToken {
   check (token: string): any {
+    const FORMATTED_TOKEN = token.split(' ')[1]
     return verify(
-      token.split(' ')[1],
+      FORMATTED_TOKEN,
       publicKey,
       { algorithms: ['RS256'] },
       (error, user) => {
-        if (error) {
-          throw new Error('unauthorized')
-        }
+        if (error) throw new Error()
         return user
       }
     )

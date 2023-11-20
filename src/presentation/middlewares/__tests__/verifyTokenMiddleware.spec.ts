@@ -45,6 +45,17 @@ describe('Verify Token Middleware', () => {
     const response = await sut.handle(authorizationHeader)
     expect(response).toEqual(responseHelper('unauthorized'))
   })
+  it('should throw if checkToken throws', async () => {
+    const { sut, checkTokenStub } = makeSut()
+    jest.spyOn(checkTokenStub, 'check').mockImplementationOnce(() => {
+      throw new Error()
+    })
+    const response = await sut.handle({
+      authorization: 'valid_token_user_id_2',
+      params: { id: '2' }
+    })
+    expect(response).toEqual(responseHelper('serverError'))
+  })
   it('should return success if token is valid', async () => {
     const { sut } = makeSut()
     const authorizationHeader: HttpRequest = { authorization: 'valid_token' }
