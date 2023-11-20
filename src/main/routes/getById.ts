@@ -1,7 +1,7 @@
 import { type Router } from 'express'
 import { GetAccountBy } from '../../presentation/controllers/user/getAccount'
 import { UserRepository } from '../../infra/typeorm/repositories/userRepository'
-import { GetAccountById } from '../../data/useCases/getAccountById'
+import { GetAccountById } from '../../data/useCases/user/getAccountById'
 import { authMiddleware } from '../middlewares/authMiddleware'
 
 export default (route: Router): void => {

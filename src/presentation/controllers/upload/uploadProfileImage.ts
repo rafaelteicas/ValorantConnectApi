@@ -1,4 +1,4 @@
-import { type GetAccountById } from '../../../data/useCases/getAccountById'
+import { type GetAccountById } from '../../../data/useCases/user/getAccountById'
 import { type UserRepository } from '../../../infra/typeorm/repositories/userRepository'
 import { type Controller } from '../../protocols/controller'
 import { type HttpRequest, type HttpResponse } from '../../protocols/http'
@@ -19,7 +19,7 @@ export class UploadProfileImage implements Controller {
     this.storage = storage
   }
 
-  async handle (request: HttpRequest): Promise<HttpResponse> {
+  async handle (request: HttpRequest<any>): Promise<HttpResponse> {
     const USER_ID = request.params?.id
     try {
       if (!USER_ID) throw new Error()

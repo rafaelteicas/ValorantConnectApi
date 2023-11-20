@@ -1,6 +1,6 @@
-import { type Encrypter } from '../../domain/encrypter/encrypter'
-import { type UserAccount, type User } from '../../domain/user/userTypes'
-import { type UserRepository } from '../../infra/typeorm/repositories/userRepository'
+import { type Encrypter } from '../../../domain/encrypter/encrypter'
+import { type UserAccount, type User } from '../../../domain/user/userTypes'
+import { type UserRepository } from '../../../infra/typeorm/repositories/userRepository'
 
 export class AddAccount {
   private readonly userRepository: typeof UserRepository

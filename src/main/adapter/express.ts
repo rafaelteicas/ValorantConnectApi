@@ -4,7 +4,7 @@ import { type HttpResponse, type HttpRequest } from '../../presentation/protocol
 
 export function adapterExpress (controller: Controller) {
   return async (req: Request, res: Response) => {
-    const httpRequest: HttpRequest = {
+    const httpRequest: HttpRequest<any> = {
       body: req.body,
       params: { id: req.params.id },
       fileImage: req.file

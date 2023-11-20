@@ -13,7 +13,7 @@ export class AuthMiddleware implements Middleware {
     this.getAccountBy = getAccountBy
   }
 
-  async handle ({ authorization, params }: HttpRequest): Promise<HttpResponse> {
+  async handle ({ authorization, params }: HttpRequest<any>): Promise<HttpResponse> {
     try {
       if (!authorization || !params) {
         return response('unauthorized')

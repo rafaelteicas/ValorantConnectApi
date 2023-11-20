@@ -1,10 +1,11 @@
-export interface HttpRequest {
-  body?: any
+export interface HttpRequest<T> {
+  body?: T
   params?: {
     id: string
   }
   authorization?: string
   fileImage?: Express.Multer.File
+  query?: any
 }
 
 export interface HttpResponse {

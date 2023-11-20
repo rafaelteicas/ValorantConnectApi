@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 import { type UserAccount } from '../../../domain/user/userTypes'
+import { Post } from './Post'
 
 @Entity()
 export class User implements UserAccount {
@@ -23,4 +24,7 @@ export class User implements UserAccount {
     unique: true
   })
     profile_image: string
+
+  @OneToMany(() => Post, (post) => post)
+    posts: Post[]
 }

@@ -1,6 +1,6 @@
 import { type Router } from 'express'
 import { adapterExpress } from '../adapter/express'
-import { makeUploadProfileImage } from '../factories/makeUploadProfileImage'
+import { makeUploadProfileImage } from '../factories/upload/makeUploadProfileImage'
 import { storage } from '../../infra/storage/multer'
 
 export default function (route: Router): void {

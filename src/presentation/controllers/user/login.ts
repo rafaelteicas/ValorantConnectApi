@@ -1,4 +1,4 @@
-import { type Auth } from '../../../data/useCases/auth'
+import { type Auth } from '../../../data/useCases/user/auth'
 import { type Controller } from '../../protocols/controller'
 import { type HttpRequest, type HttpResponse } from '../../protocols/http'
 
@@ -8,7 +8,7 @@ export class Login implements Controller {
     this.auth = auth
   }
 
-  async handle (request: HttpRequest): Promise<HttpResponse> {
+  async handle (request: HttpRequest<any>): Promise<HttpResponse> {
     try {
       const { email, password } = request.body
       const token = await this.auth.auth({ email, password })

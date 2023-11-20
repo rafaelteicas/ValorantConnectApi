@@ -1,7 +1,7 @@
-import { type Encrypter } from '../../domain/encrypter/encrypter'
-import { type UserRepository } from '../../infra/typeorm/repositories/userRepository'
-import { generateRefreshToken, generateToken } from '../../infra/jwt/utils/jwtGenerator'
-import { type AccountData } from '../../domain/user/userTypes'
+import { type Encrypter } from '../../../domain/encrypter/encrypter'
+import { type UserRepository } from '../../../infra/typeorm/repositories/userRepository'
+import { generateRefreshToken, generateToken } from '../../../infra/jwt/utils/jwtGenerator'
+import { type AccountData } from '../../../domain/user/userTypes'
 
 export class Auth {
   private readonly userRepository: typeof UserRepository

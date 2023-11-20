@@ -1,6 +1,6 @@
-import { type User } from '../../infra/typeorm/entities/User'
-import { type UserRepository } from '../../infra/typeorm/repositories/userRepository'
-import { type GetAccountBy } from '../protocols/getAccountBy'
+import { type User } from '../../../infra/typeorm/entities/User'
+import { type UserRepository } from '../../../infra/typeorm/repositories/userRepository'
+import { type GetAccountBy } from '../../protocols/getAccountBy'
 
 export class GetAccountById implements GetAccountBy {
   private readonly userRepository: typeof UserRepository

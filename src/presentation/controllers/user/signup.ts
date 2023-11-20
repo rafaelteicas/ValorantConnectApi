@@ -1,5 +1,5 @@
 import { type GetAccountBy } from '../../../data/protocols/getAccountBy'
-import { type AddAccount } from '../../../data/useCases/addAccount'
+import { type AddAccount } from '../../../data/useCases/user/addAccount'
 import { response } from '../../helpers/http'
 import { type Controller } from '../../protocols/controller'
 import { type HttpRequest, type HttpResponse } from '../../protocols/http'
@@ -13,7 +13,7 @@ export class CreateUser implements Controller {
     this.getAccountBy = getAccountBy
   }
 
-  async handle (request: HttpRequest): Promise<HttpResponse> {
+  async handle (request: HttpRequest<any>): Promise<HttpResponse> {
     try {
       const { email, password, username, confirmPassword } = request.body
       const requiredFields = [
