@@ -7,7 +7,8 @@ export function adapterExpress (controller: Controller) {
     const httpRequest: HttpRequest<any> = {
       body: req.body,
       params: { id: req.params.id },
-      fileImage: req.file
+      fileImage: req.file,
+      query: req.query
     }
     const httpResponse: HttpResponse = await controller.handle(httpRequest)
     res.status(httpResponse.status).json(httpResponse.body)
