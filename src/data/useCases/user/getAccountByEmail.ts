@@ -9,10 +9,9 @@ export class GetAccountByEmail implements GetAccountBy {
     this.userRepository = userRepository
   }
 
-  async get (email: string): Promise<User> {
+  async get (email: string): Promise<User | null> {
     if (!email) throw new Error()
     const user = await this.userRepository.findOneBy({ email })
-    if (!user) throw new Error('USER NOT FOUND')
     return user
   }
 }
