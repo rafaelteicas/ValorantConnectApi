@@ -3,6 +3,7 @@ import { type UserRepository } from '../../../infra/typeorm/repositories/userRep
 import { type Controller } from '../../protocols/controller'
 import { type HttpRequest, type HttpResponse } from '../../protocols/http'
 import { type Storage } from '../../../domain/storage/storage'
+import { response } from '../../helpers/http'
 
 export class UploadProfileImage implements Controller {
   private readonly getAccountById: GetAccountById
@@ -34,17 +35,9 @@ export class UploadProfileImage implements Controller {
         user.profile_image = newUrl
         await this.userRepository.save(user)
       }
-      return {
-        body: 'Deu bom',
-        status: 200
-      }
+      return response('success')
     } catch (er) {
-      console.log(er)
-
-      return {
-        body: 'erro',
-        status: 500
-      }
+      return response('serverError')
     }
   }
 }

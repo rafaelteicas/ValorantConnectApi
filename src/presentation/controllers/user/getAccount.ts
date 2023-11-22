@@ -16,6 +16,7 @@ export class GetAccountBy implements Controller {
       return { body: new Error(), status: 400 }
     }
     const accountData = await this.getAccountById.get(request)
+    if (!accountData) throw new Error('USER NOT FOUND')
     const responseData: GetUser = {
       email: accountData.email,
       username: accountData.username,
