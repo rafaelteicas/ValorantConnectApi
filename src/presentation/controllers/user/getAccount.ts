@@ -1,27 +1,28 @@
-import { type GetAccountById } from '../../../data/useCases/user/getAccountById'
-import { response } from '../../helpers/http'
-import { type Controller } from '../../protocols/controller'
-import { type GetUser } from '../../../data/protocols/getUser'
-import { type HttpResponse } from '../../protocols/http'
+import {response} from '../../helpers/http';
+import {type Controller} from '../../protocols/controller';
+import {type HttpRequest, type HttpResponse} from '../../protocols/http';
+import {type AccountData} from '../../../domain/user/userTypes';
+import {type GetAccountByToken} from '../../../data/useCases/user/getAccountByToken';
 
 export class GetAccountBy implements Controller {
-  private readonly getAccountById: GetAccountById
-
-  constructor (getAccountById: GetAccountById) {
-    this.getAccountById = getAccountById
-  }
-
-  async handle (request: any): Promise<HttpResponse> {
-    if (!request) {
-      return { body: new Error(), status: 400 }
+  constructor(private readonly getAccountByToken: GetAccountByToken) {}
+  async handle({authorization}: HttpRequest<any>): Promise<HttpResponse> {
+    try {
+      if (!authorization) return response('unauthorized');
+      const FORMATED_TOKEN = authorization.split(' ')[1];
+      const accountData = await this.getAccountByToken.get(FORMATED_TOKEN);
+      if (!accountData) return response('unauthorized');
+      const responseData: AccountData['user'] = {
+        id: accountData.id,
+        email: accountData.email,
+        riotId: accountData.riotId,
+        username: accountData.username,
+        profileImage: accountData.profile_image,
+      };
+      return response('success', responseData);
+    } catch (err) {
+      console.log(err);
+      return response('serverError');
     }
-    const accountData = await this.getAccountById.get(request)
-    if (!accountData) throw new Error('USER NOT FOUND')
-    const responseData: GetUser = {
-      email: accountData.email,
-      username: accountData.username,
-      profileImage: accountData.profile_image
-    }
-    return response('success', responseData)
   }
 }

@@ -1,4 +1,5 @@
 import { type Auth } from '../../../data/useCases/user/auth'
+import { response } from '../../helpers/http'
 import { type Controller } from '../../protocols/controller'
 import { type HttpRequest, type HttpResponse } from '../../protocols/http'
 
@@ -12,16 +13,9 @@ export class Login implements Controller {
     try {
       const { email, password } = request.body
       const token = await this.auth.auth({ email, password })
-
-      return {
-        body: token,
-        status: 200
-      }
+      return response('success', token)
     } catch (e) {
-      return {
-        body: e.message,
-        status: 400
-      }
+      return response('serverError')
     }
   }
 }

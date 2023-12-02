@@ -1,7 +1,7 @@
 import { type Router } from 'express'
 import { adapterExpress } from '../adapter/express'
-import { makeSignUp } from '../factories/user/makeSignUp'
+import { makeRefreshToken } from '../factories/user/makeRefreshToken'
 
 export default function (route: Router): void {
-  route.post('/signup', adapterExpress(makeSignUp()))
+  route.get('/refresh_token', adapterExpress(makeRefreshToken()))
 }

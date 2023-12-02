@@ -6,19 +6,11 @@ import { type Storage } from '../../../domain/storage/storage'
 import { response } from '../../helpers/http'
 
 export class UploadProfileImage implements Controller {
-  private readonly getAccountById: GetAccountById
-  private readonly userRepository: typeof UserRepository
-  private readonly storage: Storage
-
   constructor (
-    getAccountById: GetAccountById,
-    userRepository: typeof UserRepository,
-    storage: Storage
-  ) {
-    this.userRepository = userRepository
-    this.getAccountById = getAccountById
-    this.storage = storage
-  }
+    private readonly getAccountById: GetAccountById,
+    private readonly userRepository: typeof UserRepository,
+    private readonly storage: Storage
+  ) { }
 
   async handle (request: HttpRequest<any>): Promise<HttpResponse> {
     const USER_ID = request.params?.id
@@ -31,12 +23,11 @@ export class UploadProfileImage implements Controller {
         USER_ID,
         { contentType: request.fileImage.mimetype }
       )
-      if (typeof newUrl === 'string') {
-        user.profile_image = newUrl
-        await this.userRepository.save(user)
-      }
+      user.profile_image = newUrl
+      await this.userRepository.save(user)
       return response('success')
     } catch (er) {
+      console.log(er)
       return response('serverError')
     }
   }

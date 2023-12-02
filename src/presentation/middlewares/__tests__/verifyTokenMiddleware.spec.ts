@@ -1,4 +1,4 @@
-import { type CheckTokenResponse, type CheckToken } from '../../../domain/token/checkToken'
+import { type CheckTokenResponse, type CheckToken } from '../../../domain/token/tokenValidators'
 import { VerifyTokenMiddleware } from '../verifyTokenMiddleware'
 import { response as responseHelper } from '../../helpers/http'
 import { type HttpRequest } from '../../protocols/http'

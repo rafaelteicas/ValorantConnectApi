@@ -1,5 +1,5 @@
 import { type GetAccountBy } from '../../../data/protocols/getAccountBy'
-import { type CheckTokenResponse, type CheckToken } from '../../../domain/token/checkToken'
+import { type CheckTokenResponse, type CheckToken } from '../../../domain/token/tokenValidators'
 import { AuthMiddleware } from '../authMiddleware'
 import { response as responseHelper } from '../../helpers/http'
 

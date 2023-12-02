@@ -1,12 +1,12 @@
 import { verify } from 'jsonwebtoken'
 import path from 'path'
 import fs from 'fs'
-import { type CheckToken } from '../../../domain/token/checkToken'
+import { type CheckToken } from '../../../domain/token/tokenValidators'
 
-const publicKeyPath = path.join(process.cwd(), 'keys', 'pubkey.key')
+const publicKeyPath = path.join(process.cwd(), 'src', 'keys', 'pubkey.key')
 const publicKey = fs.readFileSync(publicKeyPath)
 
-export class VerifyTokenJWT implements CheckToken {
+export class CheckTokenJWT implements CheckToken {
   check (token: string): any {
     const FORMATTED_TOKEN = token.split(' ')[1]
     return verify(

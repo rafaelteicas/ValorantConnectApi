@@ -14,6 +14,6 @@ export const response = (type: httpTypes, message?: any): HttpResponse => {
     case 'serverError':
       return { body: new ServerError(), status: 500 }
     case 'success':
-      return { body: message, status: 200 }
+      return { body: message || 'ok', status: 200 }
   }
 }

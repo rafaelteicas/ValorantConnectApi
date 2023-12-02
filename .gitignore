@@ -8,3 +8,4 @@ temp/
 keys
 **/*/*Config.json
 coverage
+dist/

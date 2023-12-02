@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  pg:
+    container_name: postgres
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=senha
+      - POSTGRES_DB=postgres
+  app:
+    build: .
+    image: api
+    container_name: api
+    command: npm start
+    environment:
+      - DATABASE_URL=postgres://postgres:senha@db:5433/postgres
+    ports:
+      - "3000:3000"
+    depends_on:
+      - pg

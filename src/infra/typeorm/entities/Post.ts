@@ -1,20 +1,39 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
-import { User } from './User'
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import {User} from './User';
+import {Agents, Elos} from '../../../domain/game/valorantTypes';
 
 @Entity()
 export class Post {
   @PrimaryGeneratedColumn()
-    id: number
+  id: number;
 
   @Column()
-    message: string
+  message: string;
 
-  @Column()
-    elo: string
+  @Column({
+    type: 'varchar',
+    length: 12,
+  })
+  elo: Elos;
 
-  @Column()
-    main: string
+  @Column({
+    type: 'varchar',
+    length: 15,
+  })
+  main: Agents;
 
-  @ManyToOne(() => User, (user) => user.posts)
-    user: User
+  @Column({
+    unique: false,
+  })
+  riotId: string;
+
+  @ManyToOne(() => User, user => user.posts)
+  @JoinColumn({name: 'user_id'})
+  user: User;
 }
