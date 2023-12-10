@@ -17,7 +17,7 @@ export interface UserAccount {
 }
 
 export interface AccountData {
-  token: TokenResult
+  token: TokenResult['token']
   user: Pick<UserAccount, 'id' | 'email' | 'username' | 'riotId' | 'profileImage' >
 }
 

@@ -15,6 +15,6 @@ export class UserPost {
       },
     });
     if (!user || !post) throw new Error();
-    await this.postRepository.save({...post, user, riotId: user.riotId});
+    await this.postRepository.save({...post, user});
   }
 }

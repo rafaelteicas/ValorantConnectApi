@@ -28,11 +28,6 @@ export class Post {
   })
   main: Agents;
 
-  @Column({
-    unique: false,
-  })
-  riotId: string;
-
   @ManyToOne(() => User, user => user.posts)
   @JoinColumn({name: 'user_id'})
   user: User;

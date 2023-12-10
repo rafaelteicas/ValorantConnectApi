@@ -24,7 +24,7 @@ export class Auth {
     if (!isValidPassword) {
       throw new Error('Usuário invalido')
     }
-    const token = await this.updateToken.update({
+    const {token} = await this.updateToken.update({
       id: user.id,
       email: user.email,
       profileImage: user.profile_image,

@@ -3,7 +3,7 @@ import { PostRepository } from '../../../infra/typeorm/repositories/postReposito
 import { GetPosts } from '../../../presentation/controllers/post/getPosts'
 import { type Controller } from '../../../presentation/protocols/controller'
 
-export const makeGetUserPosts = (): Controller => {
+export const makeGetUserPosts = (): Controller => {  
   const userPostList = new UserPostList(PostRepository)
   return new GetPosts(userPostList)
 }
