@@ -4,6 +4,6 @@ import { makeUploadProfileImage } from '../factories/upload/makeUploadProfileIma
 import { storage } from '../../infra/storage/multer'
 import { authMiddleware } from '../middlewares/authMiddleware'
 
-export default function (route: Router): void {
+export function uploadProfileImage (route: Router): void {
   route.post('/profileImage/:id', storage.single('image'), authMiddleware, adapterExpress(makeUploadProfileImage()))
 }

@@ -4,4 +4,5 @@ export interface PostType {
   message: string;
   elo: Elos;
   main: Agents;
+  other: Agents[]
 }

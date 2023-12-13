@@ -9,7 +9,8 @@ AppDataSource.initialize()
   .then(() => {
     console.log('CONNECTED')
   })
-  .catch(() => {
+  .catch(e => {
+    console.log(e);
     throw new Error('CONECTE COM O DOCKER')
   })
 

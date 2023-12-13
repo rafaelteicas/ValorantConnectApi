@@ -6,10 +6,9 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import {User} from './User';
-import {Agents, Elos} from '../../../domain/game/valorantTypes';
 
 @Entity()
-export class Post {
+export class Post  {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -20,13 +19,19 @@ export class Post {
     type: 'varchar',
     length: 12,
   })
-  elo: Elos;
+  elo: string;
 
   @Column({
     type: 'varchar',
     length: 15,
   })
-  main: Agents;
+  main: string;
+
+  @Column({
+    type: 'varchar',
+    array: true
+  })
+  other: string[];
 
   @ManyToOne(() => User, user => user.posts)
   @JoinColumn({name: 'user_id'})

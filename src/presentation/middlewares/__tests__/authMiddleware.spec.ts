@@ -57,6 +57,8 @@ describe('Auth Middleware', () => {
       user: { email: 'any_mail@mail.com', id: 2 }
     })
     jest.spyOn(getAccountByIdStub, 'get').mockResolvedValueOnce(
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       new Promise((resolve) => resolve({ id: 1 }))
     )
     const response = await sut.handle({
