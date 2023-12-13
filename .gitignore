@@ -9,3 +9,4 @@ keys
 **/*/*Config.json
 coverage
 dist/
+src/infra/typeorm/dataSource.ts

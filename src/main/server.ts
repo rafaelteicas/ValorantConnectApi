@@ -3,7 +3,7 @@ import { appConfig } from './config/app'
 
 const app = appConfig()
 
-const PORT = 3000
+const PORT = 5000
 
 AppDataSource.initialize()
   .then(() => {
@@ -14,6 +14,6 @@ AppDataSource.initialize()
     throw new Error('CONECTE COM O DOCKER')
   })
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT || PORT, () => {
   console.log(`Server is running https://localhost:${PORT}`)
 })
