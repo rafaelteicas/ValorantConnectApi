@@ -11,8 +11,8 @@ export class Post implements Controller {
     authorization,
   }: HttpRequest<PostType>): Promise<HttpResponse> {
     if (!body || !authorization) return response('missing');
-    const requiredFields = ['main', 'elo', 'message'];
-    for (const field of requiredFields) {
+    const requiredFields = ['main', 'elo', 'other'];
+    for (const field of requiredFields) {      
       if (!body[field]) return response('missing');
     }
     try {

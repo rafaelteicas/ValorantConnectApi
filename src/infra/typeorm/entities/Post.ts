@@ -12,8 +12,10 @@ export class Post  {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  message: string;
+  @Column({
+    nullable: true
+  })
+  message?: string;
 
   @Column({
     type: 'varchar',
@@ -36,4 +38,7 @@ export class Post  {
   @ManyToOne(() => User, user => user.posts)
   @JoinColumn({name: 'user_id'})
   user: User;
+
+  @Column({ type: 'timestamp' })
+  date: Date;
 }

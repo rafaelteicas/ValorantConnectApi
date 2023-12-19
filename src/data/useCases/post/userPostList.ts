@@ -12,7 +12,10 @@ export class UserPostList {
     const [items, totalItems] = await this.postRepository.findAndCount({
       take: parseInt(perPage),
       skip: (currentPage - 1) * parseInt(perPage),
-      loadRelationIds: true
+      loadRelationIds: true,
+      order: {
+        date: 'DESC'
+      }
     });
     const totalPages = Math.ceil(totalItems / parseInt(perPage));
     const nextPage = hasNextPage(totalPages, currentPage);
