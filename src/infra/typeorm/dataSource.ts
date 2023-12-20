@@ -10,8 +10,11 @@ export const AppDataSource = new DataSource({
   port: 5432,
   synchronize: true,
   entities: [path.join(__dirname, '/entities/*.{js,ts}')],
-  ssl: {
-    rejectUnauthorized: true
-  },
+  // ssl: {
+  //   rejectUnauthorized: true
+  // },
   url: process.env.DATABASE_URL,
+  database: process.env.DB_DATABASE,
+  username: process.env.DB_USERNAME,
+  password:  process.env.DB_PASSWORD
 })

@@ -31,23 +31,14 @@ export class CreateUser implements Controller {
       if (user != null) {
         return response('conflict')
       }
-      await this.addAccount.add({
+      const accountData = await this.addAccount.add({
         email,
         password,
         username,
         confirmPassword,
         riotId
       })
-      const newUser = await this.getAccountBy.get(email)
-      if (!newUser) throw new Error()
-      const token = await this.updateToken.update({
-        id: newUser?.id,
-        email,
-        riotId,
-        username,
-        profileImage: newUser?.profile_image
-      }, newUser)
-      return response('success', token)
+      return response('success', accountData)
     } catch (err) {
       console.log(err)
       return response('serverError')

@@ -16,7 +16,7 @@ export class Auth {
     })
     if (!user) {
       throw new Error('Usuário invalido')
-    }
+    }    
     const isValidPassword = await this.encrypter.compare(
       account.password,
       user.password
