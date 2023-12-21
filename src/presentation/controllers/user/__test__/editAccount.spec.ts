@@ -1,10 +1,12 @@
 import { type EditAccountInfo } from "../../../../data/protocols/editAccountData"
+import { type Unique } from "../../../../domain/user/unique"
 import { response } from "../../../helpers/http"
 import { EditAccount } from "../editAccount"
 
 interface SutTypes {
   sut: EditAccount
   editAccountInfoStub: EditAccountInfo
+  isUniqueStub: Unique
 }
 
 const makeEditAccountInfoStub = (): EditAccountInfo => {
@@ -16,12 +18,23 @@ const makeEditAccountInfoStub = (): EditAccountInfo => {
   return new EditAccountInfoStub()
 }
 
+const makeIsUniqueStub = (): Unique => {
+  class IsUniqueStub implements Unique {
+    async isUnique(value: string): Promise<boolean> {
+      return await new Promise(resolve=> resolve(true))
+    }
+  }
+  return new IsUniqueStub()
+}
+
 const makeSut = (): SutTypes => {
+  const isUniqueStub = makeIsUniqueStub()
   const editAccountInfoStub = makeEditAccountInfoStub()
-  const sut = new EditAccount(editAccountInfoStub)
+  const sut = new EditAccount(editAccountInfoStub, isUniqueStub)
   return {
     sut,
-    editAccountInfoStub
+    editAccountInfoStub,
+    isUniqueStub
   }
 }
 describe('Edit Profile', () => {
@@ -50,6 +63,19 @@ describe('Edit Profile', () => {
     }
     const httpResponse = await sut.handle(request)
     expect(httpResponse).toEqual(response('missing'))
+  })
+  it('should return conflict if the value is not unique', async () => {
+    const { sut, isUniqueStub } = makeSut()
+    jest.spyOn(isUniqueStub, 'isUnique').mockReturnValueOnce(new Promise(resolve => resolve(false)))
+    const request = {
+      authorization: 'valid_token',
+      body: {
+        field: 'any_field',
+        value: 'already_exists_value'
+      }
+    }
+    const httpResponse = await sut.handle(request)
+    expect(httpResponse).toEqual(response('conflict'))
   })
   it('should return success if valid fields are provided', async () => {
     const { sut } = makeSut()
