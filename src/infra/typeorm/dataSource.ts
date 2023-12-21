@@ -9,7 +9,7 @@ const isProd = (): any => {
   if (process.env.DATABASE_URL) {
     return {
       ssl: {
-        rejectUnauthorized: true
+        rejectUnauthorized: false
       },
       url: process.env.DATABASE_URL
     }
