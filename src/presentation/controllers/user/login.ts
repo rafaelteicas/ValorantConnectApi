@@ -16,6 +16,8 @@ export class Login implements Controller {
       if(!token) return response('unauthorized')
       return response('success', token)
     } catch (e) {
+      console.log(e);
+      
       return response('serverError')
     }
   }

@@ -10,9 +10,9 @@ import { type Controller } from '../../../presentation/protocols/controller'
 export function makeSignUp (): Controller {
   const bcrypt = new BcryptEncrypter()
   const updateToken = new UpdateToken(UserRepository)
-  const auth = new Auth(UserRepository, bcrypt, updateToken,)
+  const auth = new Auth(UserRepository, bcrypt, updateToken)
   const account = new AddAccount(UserRepository, bcrypt, auth)
   const getAccountByEmail = new GetAccountByEmail(UserRepository)
-  const controller = new CreateUser(account, getAccountByEmail, updateToken)
+  const controller = new CreateUser(account, getAccountByEmail)
   return controller
 }

@@ -8,5 +8,6 @@ export const makeUploadProfileImage = (): Controller => {
   const getById = new GetAccountById(UserRepository)
   const storage = new FirebaseStorageService()
   const controller = new UploadProfileImage(getById, UserRepository, storage)
+  
   return controller
 }

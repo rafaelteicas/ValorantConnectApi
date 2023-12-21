@@ -12,7 +12,7 @@ export class UploadProfileImage implements Controller {
     private readonly storage: Storage
   ) { }
 
-  async handle (request: HttpRequest<any>): Promise<HttpResponse> {
+  async handle(request: HttpRequest<any>): Promise<HttpResponse> {
     const USER_ID = request.params?.id
     try {
       if (!USER_ID) throw new Error()
