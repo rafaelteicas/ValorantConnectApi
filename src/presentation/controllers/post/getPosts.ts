@@ -1,10 +1,10 @@
-import { type UserPostList } from '../../../data/useCases/post/userPostList'
+import { type GetPostList } from '../../../domain/post/getPostList'
 import { response } from '../../helpers/http'
 import { type Controller } from '../../protocols/controller'
 import { type HttpRequest, type HttpResponse } from '../../protocols/http'
 
 export class GetPosts implements Controller {
-  constructor (private readonly userPostList: UserPostList) { }
+  constructor (private readonly userPostList: GetPostList) { }
 
   async handle (request: HttpRequest<void>): Promise<HttpResponse | any> {    
     try {

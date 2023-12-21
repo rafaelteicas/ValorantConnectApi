@@ -1,10 +1,11 @@
+import { type GetPostList } from '../../../domain/post/getPostList';
 import {type PostRepository} from '../../../infra/typeorm/repositories/postRepository';
 
 interface PostListParams {
   perPage: string;
   page: string;
 }
-export class UserPostList {
+export class UserPostList implements GetPostList {
   constructor(private readonly postRepository: typeof PostRepository) {}
 
   async getPosts({perPage = '10', page = '1'}: PostListParams): Promise<any> {    
