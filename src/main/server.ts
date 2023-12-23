@@ -1,4 +1,4 @@
-import { AppDataSource } from '../infra/typeorm/dataSource'
+import { AppDataSource } from '../infra/typeorm/config/typeorm-config'
 import { appConfig } from './config/app'
 
 const app = appConfig()
