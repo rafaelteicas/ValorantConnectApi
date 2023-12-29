@@ -1,4 +1,4 @@
-import { type GetPostUseCase } from '../../../domain/use-cases/post/get-post-use-case';
+import {type GetPostUseCase} from '../../../domain/use-cases/post/get-post-use-case';
 import {type PostRepository} from '../../../infra/typeorm/repositories/post-repository';
 
 interface PostListParams {
@@ -8,20 +8,20 @@ interface PostListParams {
 export class UserPostList implements GetPostUseCase {
   constructor(private readonly postRepository: typeof PostRepository) {}
 
-  async getPosts({perPage = '10', page = '1'}: PostListParams): Promise<any> {    
+  async getPosts({perPage = '10', page = '1'}: PostListParams): Promise<any> {
     const currentPage = parseInt(page);
     const [items, totalItems] = await this.postRepository.findAndCount({
       take: parseInt(perPage),
       skip: (currentPage - 1) * parseInt(perPage),
       loadRelationIds: true,
       order: {
-        date: 'DESC'
-      }
+        date: 'DESC',
+      },
     });
     const totalPages = Math.ceil(totalItems / parseInt(perPage));
     const nextPage = hasNextPage(totalPages, currentPage);
     const previousPage = hasPreviousPage(totalPages, currentPage);
-    
+
     return {
       meta: {
         currentPage: page,
@@ -31,7 +31,7 @@ export class UserPostList implements GetPostUseCase {
         nextPage,
         previousPage,
       },
-      post: items
+      post: items,
     };
   }
 }

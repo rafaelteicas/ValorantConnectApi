@@ -1,9 +1,10 @@
 import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
-import {type UserAccount} from '../../../domain/models/user/user-model';
+import {type UserAccountModel} from '../../../domain/models/user/user-model';
 import {Post} from './post-entity';
+import {Conversation} from './conversation-entity';
 
 @Entity()
-export class User implements UserAccount {
+export class User implements UserAccountModel {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -33,6 +34,9 @@ export class User implements UserAccount {
 
   @OneToMany(() => Post, post => post.user)
   posts: Post[];
+
+  @OneToMany(() => Conversation, conversation => conversation.user)
+  conversations: Conversation[];
 }
 
 export type UserDataType = User;

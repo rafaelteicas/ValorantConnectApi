@@ -1,11 +1,18 @@
-import { type Express } from 'express'
-import { user, auth, refreshToken, uploadProfileImage } from '../routes'
+import {type Express} from 'express';
+import {
+  userRoute,
+  authRoute,
+  refreshTokenRoute,
+  uploadProfileImageRoute,
+  messageRoute,
+  conversationRoute,
+} from '../routes';
 
-
-
-export async function routerGenerator (app: Express): Promise<void> {
-  auth(app)
-  refreshToken(app)
-  uploadProfileImage(app)
-  user(app)
+export async function routerGenerator(app: Express): Promise<void> {
+  authRoute(app);
+  refreshTokenRoute(app);
+  uploadProfileImageRoute(app);
+  userRoute(app);
+  messageRoute(app);
+  conversationRoute(app);
 }

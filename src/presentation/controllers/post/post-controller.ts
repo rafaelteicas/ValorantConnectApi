@@ -20,7 +20,6 @@ export class PostController implements Controller {
       await this.userPost.createPost({...body}, FORMATED_TOKEN);
       return response('success', 'Post adicionado com sucesso');
     } catch (error) {
-      console.log(error);
       return response('serverError');
     }
   }

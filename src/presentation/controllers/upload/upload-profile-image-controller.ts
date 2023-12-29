@@ -27,7 +27,6 @@ export class UploadProfileImageController implements Controller {
       await this.userRepository.save(user);
       return response('success');
     } catch (er) {
-      console.log(er);
       return response('serverError');
     }
   }

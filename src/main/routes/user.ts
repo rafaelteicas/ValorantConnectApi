@@ -7,7 +7,7 @@ import {makeGetUserById} from '../factories/controllers/user/get-user/get-user-b
 import {makeEditAccount} from '../factories/controllers/user/edit/edit-account-factory';
 import {verifyTokenMiddleware} from '../middlewares/verify-token-middleware';
 
-export function user(route: Router): void {
+export function userRoute(route: Router): void {
   route.post('/user/post', adapterExpress(makeUserPost()));
   route.get('/user', adapterExpress(makeGetUser()));
   route.patch(

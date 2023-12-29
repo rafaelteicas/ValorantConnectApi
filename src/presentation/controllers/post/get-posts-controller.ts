@@ -12,7 +12,6 @@ export class GetPostsController implements Controller {
       const posts = await this.userPostList.getPosts({page, perPage});
       return response('success', posts);
     } catch (error) {
-      console.log(error);
       return response('serverError');
     }
   }

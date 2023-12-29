@@ -21,7 +21,6 @@ export class GetAccountBy implements Controller {
       };
       return response('success', responseData);
     } catch (err) {
-      console.log(err);
       return response('serverError');
     }
   }

@@ -1,4 +1,4 @@
-import { AppDataSource } from '../config/typeorm-config'
-import { User } from '../entities/user-entity'
+import {AppDataSource} from '../config/typeorm-config';
+import {User} from '../entities/user-entity';
 
-export const UserRepository = AppDataSource.getRepository(User)
+export const UserRepository = AppDataSource.getRepository(User);

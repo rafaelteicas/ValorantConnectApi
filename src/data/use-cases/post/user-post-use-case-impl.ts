@@ -13,8 +13,8 @@ export class UserPost {
       where: {
         token,
       },
-    });    
+    });
     if (!user || !post) throw new Error();
-    await this.postRepository.save({...post, date: new Date() , user});
+    await this.postRepository.save({...post, date: new Date(), user});
   }
 }
