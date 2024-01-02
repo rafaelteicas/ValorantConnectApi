@@ -7,7 +7,7 @@ import {
   setDoc,
 } from 'firebase/firestore';
 import {type FirestoreServiceUseCase} from '../../../domain/use-cases/database/firestore-service-use-case';
-import {app} from '../config/firebaseConfig';
+import {app} from '../config/firebase-config';
 
 export class FirebaseFirestoreDatabaseService
   implements FirestoreServiceUseCase

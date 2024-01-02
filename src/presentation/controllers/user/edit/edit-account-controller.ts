@@ -15,8 +15,17 @@ export class EditAccount implements Controller {
       const authorization = request.authorization 
       if (!authorization) return response('unauthorized')
       const FORMATED_TOKEN = authorization.split(' ')[1];
-      const { field, value } = request.body
+      const { field, value, confirmPassword } = request.body
       if (!field || !value) return response('missing')
+      console.log(field);
+      if (field === 'password') {
+      await this.editAccountInfo.edit(
+        FORMATED_TOKEN,
+        field,
+        value,
+        confirmPassword,
+      );
+      }
       const isUnique = await this.unique.isUnique(value)
       if(!isUnique) return response('conflict')
       await this.editAccountInfo.edit(FORMATED_TOKEN, field, value)

@@ -5,7 +5,7 @@ import {
   uploadBytes,
   getDownloadURL,
 } from 'firebase/storage';
-import {app} from '../config/firebaseConfig';
+import {app} from '../config/firebase-config';
 import {type StorageService} from '../../../domain/use-cases/storage/storage-service';
 
 export class FirebaseStorageService implements StorageService {
